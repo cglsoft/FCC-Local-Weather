@@ -8,8 +8,8 @@ var gTemp = 1;
 
 $(document).ready(function() {
     getGeoLocalizacao();
-    $("#rdStckFarenheit").click( () => $("#idTemp").html(  ( ( 1.8 * gTemp) + 32 ).toFixed(2) + "&#8457") );
-    $("#rdStckCelsius").click( () => $("#idTemp").html(gTemp + "&#8451") );
+    $("#rdStckFarenheit").click( () => $("#idTemp").html(  Math.round( ( 1.8 * gTemp) + 32 ) + "&#8457") );
+    $("#rdStckCelsius").click( () => $("#idTemp").html( Math.round(gTemp) + "&#8451") );
 });
 
 function getGeoLocalizacao() {
@@ -36,7 +36,7 @@ function getGeoLocalizacao() {
         $.getJSON(url, function(json) {              
             gTemp = json.main.temp;
 
-            $("#idTemp").html(json.main.temp + "&#8451");          
+            $("#idTemp").html( Math.round(json.main.temp) + "&#8451");          
             $('#idWeatherIcon').html('<img src=' + json.weather[0].icon + ' />');
             $('#idWweatherMain').text(json.weather[0].main + ' ' + json.weather[0].description);
             $('#idAtPressure').text(json.main.pressure);
@@ -102,11 +102,3 @@ function setBackGround(mainWeather) {
     }
     document.body.style.backgroundSize = "100% 100%";
 }
-
-
-
-
-
-
-
-
